@@ -20,8 +20,6 @@ size = width, height
 root.geometry(f'{width}x{height}+{(screensize[0]-width)//2}+{(screensize[1]-height)//2}')
 
 
-
-
 def close_window():
     if messagebox.askokcancel("Quit", "Do you want to quit?"):
         root.destroy()
