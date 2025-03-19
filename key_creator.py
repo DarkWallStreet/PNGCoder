@@ -12,12 +12,13 @@ alp = sym + num + ru + en
 
 
 
+
 def key_creator(file_name: str = 'key'):
     global alp
     variants = []
     i = 0
-    while i != ((len(alp) * 2) + 3):
-        n = (randint(0, 255), randint(0, 255), randint(0, 255))
+    while i != ((len(alp) * 2) + 5):
+        n = randint(0, 255), randint(0, 255), randint(0, 255)
         if n not in variants and n != (0,0,0):
             variants.append(n)
             i += 1
@@ -26,5 +27,8 @@ def key_creator(file_name: str = 'key'):
     for item in alp:
         dict[item] = variants[:2]
         variants = variants[2:]
+    dict['unknown'] = variants[:2]
     with open(f'{file_name}.json', 'w+') as file:
         json.dump(dict, file)
+
+key_creator()
