@@ -18,7 +18,7 @@ def key_creator(file_name: str = 'key'):
     i = 0
     while i != ((len(alp) * 2) + 3):
         n = (randint(0, 255), randint(0, 255), randint(0, 255))
-        if n not in variants:
+        if n not in variants and n != (0,0,0):
             variants.append(n)
             i += 1
     dict = {space:[variants[:3]]}

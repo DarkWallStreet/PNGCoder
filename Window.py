@@ -3,13 +3,18 @@ from tkinter import messagebox
 import ctypes
 from key_creator import key_creator
 
+import subprocess
+import sys
+package = 'pillow'
+subprocess.check_call([sys.executable, '-m', 'pip', 'install', package])
+
 
 
 
 # Creating a window (name & icon)
 root = Tk()
 root.title('PNGCoder')
-root.iconbitmap(default='Key_icon.ico')
+root.iconbitmap(default='key_icon.ico')
 
 # Window size
 user32 = ctypes.windll.user32
@@ -18,6 +23,7 @@ width = screensize[0]//4
 height = (screensize[1]//3) * 2
 size = width, height
 root.geometry(f'{width}x{height}+{(screensize[0]-width)//2}+{(screensize[1]-height)//2}')
+
 
 
 def close_window():
