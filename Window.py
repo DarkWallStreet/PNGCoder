@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 import ctypes
-
+from key_creator import key_creator
 
 
 
@@ -26,11 +26,7 @@ def close_window():
     if messagebox.askokcancel("Quit", "Do you want to quit?"):
         root.destroy()
 
-
-
-
 root.protocol('WM_DELETE_WINDOW', close_window)
-
 
 
 
