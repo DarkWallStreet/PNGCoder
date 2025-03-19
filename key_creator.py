@@ -1,4 +1,7 @@
+from itertools import repeat
 from random import randint
+import json
+from tkinter.font import names
 
 
 space = ' '
@@ -11,11 +14,32 @@ en = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
 
 alp = sym + num + ru + en
 
-print(alp)
+
+
+variants = []
+i = 0
+while i != ((len(alp)*2)+3):
+    n = (randint(0,255), randint(0,255), randint(0,255))
+    if n not in variants:
+        variants.append(n)
+        i += 1
+
+
+print(len(variants))
+print(len(alp))
+
+
 
 def key_creator(file_name: str = 'key'):
-    with open(f'{file_name}.json', 'ab+') as file:
-        for item in alp:
-            print(file.readlines())
+    global variants
+    global alp
+    print(variants)
+    dict = {space:[variants[:3]]}
+    variants = variants[3:]
+    for item in alp:
+        dict[item] = variants[:2]
+        variants = variants[2:]
 
 
+key_creator()
+print('adds')
