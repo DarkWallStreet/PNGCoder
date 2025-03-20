@@ -17,19 +17,19 @@ def key_creator(file_name: str = 'key'):
     global alp
     variants = []
     i = 0
-    while i != ((len(alp) * 10) + 7):
+    while i != ((len(alp) * 10) + 10):
         n = randint(0, 255), randint(0, 255), randint(0, 255)
         if n not in variants and n != (0,0,0):
             variants.append(n)
             i += 1
-    dict = {space:[variants[:3]]}
-    variants = variants[3:]
+    dict = {space:[variants[:5]]}
+    variants = variants[5:]
     for item in alp:
         z = randint(2, 10)
         dict[item] = variants[:z]
         variants = variants[z:]
     dict['unknown'] = variants[:2]
     variants = variants[2:]
-    dict['\n'] = variants[:2]
+    dict['\n'] = variants[:3]
     with open(f'{file_name}.json', 'w+') as file:
         json.dump(dict, file)
