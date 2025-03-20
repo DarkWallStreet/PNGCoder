@@ -4,10 +4,9 @@ import ctypes
 from key_creator import key_creator
 import subprocess
 import sys
-
 package = 'pillow'
 subprocess.check_call([sys.executable, '-m', 'pip', 'install', package])
-
+from coder import coder
 
 
 

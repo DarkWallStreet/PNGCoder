@@ -1,21 +1,34 @@
-from PIL import Image
+from PIL import Image, ImageDraw
 import json
 from random import randint
+import os
 
-def coder(key_file: str = 'key.json', message: str = "Hello World", file_name: str = 'code.png'):
+def coder(key_file: str = 'key.json', message: str = "Hello World! \nThis code is the best\nI love this script228", file_name: str = 'code'):
     with open(f'{key_file}', 'r+') as file:
         key = json.load(file)
-    png = []
+    codes = []
     for letter in message:
         if letter == ' ':
-            png.append(key[letter][0][randint(0, 2)])
+            codes.append(key[letter][0][randint(0, 2)])
         elif letter not in key.keys():
             letter = 'unknown'
-            png.append(key[letter][randint(0, 1)])
+            codes.append(key[letter][randint(0, 1)])
         else:
             png.append(key[letter][randint(0, 1)])
-    message = message.split('\n')
-    img = Image.new('RGB', [len(max(message, key=len)), len(message)], 'black')
+    n=2
+    if len(message) > 10:
+        n = len(message)//6+1
+    img = Image.new('RGB', ((len(message)//n)+1, n), 'black')
+    idraw = ImageDraw.Draw(img)
+    i = 0
+    for y in range(n):
+        for x in range((len(message)//n)+1):
+            try:
+                idraw.rectangle((x, y, x, y), fill=tuple(codes[i]))
+                i+=1
+            except: pass
+    img.save(f'{os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')}/{file_name}.png')
 
 
-png = coder()
+
+coder()
