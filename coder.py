@@ -33,11 +33,11 @@ def coder(key_file: str = 'key.json', message: str = "Hello World! \nThis code i
 
 
 
-def decoder(key_file: str = 'key.json', file_path: str = f'{os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')}/' , file_name: str = 'code.png'):
+def decoder(key_file: str = 'key.json', file_path: str = f'{os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')}/code.png'):
     with open(f'{key_file}', 'r+') as file:
         key = json.load(file)
     pixs = list(key.values())
-    image = Image.open(f'{file_path}{file_name}')
+    image = Image.open(f'{file_path}')
     picwidth = image.size[0]
     picheight = image.size[1]
     im = image.load()
