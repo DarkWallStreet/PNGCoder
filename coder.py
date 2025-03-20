@@ -14,7 +14,8 @@ def coder(key_file: str = 'key.json', message: str = "Hello World", file_name: s
             png.append(key[letter][randint(0, 1)])
         else:
             png.append(key[letter][randint(0, 1)])
-    img = Image.new('RGB', [max(len(message.split('\n'), key = len), len(message.split('\n')))], 'black')
+    message = message.split('\n')
+    img = Image.new('RGB', [len(max(message, key=len)), len(message)], 'black')
 
 
 png = coder()
