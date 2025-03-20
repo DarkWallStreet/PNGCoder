@@ -32,6 +32,7 @@ def coder(key_file: str = 'key.json', message: str = "Hello World! \nThis code i
     img.save(f'{file_path}{file_name}.png')
 
 
+
 def decoder(key_file: str = 'key.json', file_path: str = f'{os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')}/' , file_name: str = 'code.png'):
     with open(f'{key_file}', 'r+') as file:
         key = json.load(file)
