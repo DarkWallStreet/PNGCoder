@@ -32,7 +32,7 @@ root.protocol('WM_DELETE_WINDOW', close_window)
 
 
 try:
-    a =open('key.json')
+    a = open('key.json')
     a.close()
 except:
     key_creator()
