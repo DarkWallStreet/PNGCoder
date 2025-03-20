@@ -6,10 +6,7 @@ import subprocess
 import sys
 package = 'pillow'
 subprocess.check_call([sys.executable, '-m', 'pip', 'install', package])
-from coder import coder
-
-
-
+from coder import coder, decoder
 
 # Creating a window (name & icon)
 root = Tk()
@@ -40,12 +37,12 @@ try:
 except:
     key_creator()
 
+coder(message='Hello World')
+res = decoder()
 
-coder()
 
 
-
-label = Label(text='Hello World')
+label = Label(text=res)
 label.pack()
 
 
