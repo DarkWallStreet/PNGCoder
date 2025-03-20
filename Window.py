@@ -33,8 +33,15 @@ def close_window():
 root.protocol('WM_DELETE_WINDOW', close_window)
 
 
-key_creator()
+
+try:
+    a =open('key.json')
+    a.close()
+except:
+    key_creator()
 coder()
+
+
 
 label = Label(text='Hello World')
 label.pack()
