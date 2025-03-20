@@ -39,6 +39,8 @@ try:
     a.close()
 except:
     key_creator()
+
+
 coder()
 
 
