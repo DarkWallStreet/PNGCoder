@@ -30,4 +30,3 @@ def coder(key_file: str = 'key.json', message: str = "Hello World! \nThis code i
                 i+=1
             except: pass
     img.save(f'{os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')}/{file_name}.png')
-
