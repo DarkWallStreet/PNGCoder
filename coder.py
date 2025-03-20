@@ -14,7 +14,7 @@ def coder(key_file: str = 'key.json', message: str = "Hello World! \nThis code i
             letter = 'unknown'
             codes.append(key[letter][randint(0, 1)])
         else:
-            png.append(key[letter][randint(0, 1)])
+            codes.append(key[letter][randint(0, 1)])
     n=2
     if len(message) > 10:
         n = len(message)//6+1
@@ -29,6 +29,3 @@ def coder(key_file: str = 'key.json', message: str = "Hello World! \nThis code i
             except: pass
     img.save(f'{os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')}/{file_name}.png')
 
-
-
-coder()
