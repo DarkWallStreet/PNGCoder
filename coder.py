@@ -1,3 +1,5 @@
+from ctypes import c_double
+
 from PIL import Image, ImageDraw
 import json
 from random import randint
@@ -17,7 +19,7 @@ def coder(key_file: str = 'key.json', message: str = "Hello World! \nThis code i
             codes.append(key[letter][randint(0, 1)])
     n=2
     if len(message) > 10:
-        n = len(message)//6+1
+        n = int((len(message)**0.5)+1)
     img = Image.new('RGB', ((len(message)//n)+1, n), 'black')
     idraw = ImageDraw.Draw(img)
     i = 0
