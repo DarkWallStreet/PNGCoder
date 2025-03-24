@@ -1,8 +1,8 @@
-
 from PIL import Image, ImageDraw
 import json
 from random import randint
 import os
+
 
 def coder(key_file: str = 'key.json', message: str = "Hello World! \nThis code is the best\nI love this script228", code_path: str = f'{os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')}/', code_name: str = 'code', file_path: str = None):
     message = message.replace('|', '÷')
