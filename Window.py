@@ -31,6 +31,12 @@ root.protocol('WM_DELETE_WINDOW', close_window)
 
 
 
+
+
+
+
+
+
 try:
     a = open('key.json')
     a.close()
@@ -38,8 +44,10 @@ except:
     key_creator()
 
 
-coder(message='Hello World !!')
+coder(message='Hello world!')
 res = decoder()
+
+
 
 
 
