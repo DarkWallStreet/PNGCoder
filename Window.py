@@ -44,7 +44,7 @@ try:
     a = open('key.json')
     a.close()
 except:
-    print('Start creating key')
+    print('Creating key')
     key_creator()
 
 print('Start coding')
