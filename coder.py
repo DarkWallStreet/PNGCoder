@@ -1,10 +1,11 @@
 from PIL import Image, ImageDraw
 import json
 from random import randint
+import datetime
+from tqdm import tqdm
 import os
 
-
-def coder(key_file: str = 'key.json', message: str = "Hello World! \nThis code is the best\nI love this script228", code_path: str = f'{os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')}/', code_name: str = 'code', file_path: str = None):
+def coder(key_file: str = 'key.json', message: str = "Hello World!", code_path: str = 'Codes/', code_name: str = f'Code_{datetime.datetime.now().date()}_{datetime.datetime.now().time().hour}-{datetime.datetime.now().time().minute}-{datetime.datetime.now().time().second}', file_path: str = None):
     message = message.replace('|', '÷')
     if file_path != None:
         file_path = file_path.replace('\\', '/')
@@ -15,7 +16,7 @@ def coder(key_file: str = 'key.json', message: str = "Hello World! \nThis code i
     with open(f'{key_file}', 'r+') as file:
         key = json.load(file)
     codes = []
-    for letter in message:
+    for letter in tqdm(message, desc='Coding', colour='#00f058'):
         if letter == ' ':
             codes.append(key[letter][randint(0, 4)])
         elif letter not in key.keys():
@@ -29,17 +30,22 @@ def coder(key_file: str = 'key.json', message: str = "Hello World! \nThis code i
     img = Image.new('RGB', ((len(message)//n)+1, n), 'black')
     idraw = ImageDraw.Draw(img)
     i = 0
-    for y in range(n):
+    for y in tqdm(range(n), desc='Writing in picture', colour='#00f058'):
         for x in range((len(message)//n)+1):
             try:
                 idraw.rectangle((x, y, x, y), fill=tuple(codes[i]))
                 i+=1
             except: pass
-    img.save(f'{code_path}{code_name}.png')
+    try:
+        img.save(f'{code_path}{code_name}.png')
+    except:
+        os.mkdir(f'{code_path}')
+        img.save(f'{code_path}{code_name}.png')
+    return f'{code_path}{code_name}.png'
 
 
 
-def decoder(key_file: str = 'key.json', code_path: str = f'{os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')}/code.png'):
+def decoder(key_file: str = 'key.json', code_path: str = f'Codes/code.png'):
     with open(f'{key_file}', 'r+') as file:
         key = json.load(file)
     pixs = list(key.values())
@@ -51,7 +57,7 @@ def decoder(key_file: str = 'key.json', code_path: str = f'{os.path.join(os.path
     fl = 0
     file_name = ''
     file_data = ''
-    for y in range(picheight):
+    for y in tqdm(range(picheight), desc='Decoding', colour='#00f058'):
         for x in range(picwidth):
             pix = im[x,y]
             for i in pixs:
@@ -73,4 +79,3 @@ def decoder(key_file: str = 'key.json', code_path: str = f'{os.path.join(os.path
             file_data = bytes.fromhex(file_data)
             file.write(file_data)
     return res
-

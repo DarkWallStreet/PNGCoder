@@ -6,6 +6,8 @@ import subprocess
 import sys
 package = 'pillow'
 subprocess.check_call([sys.executable, '-m', 'pip', 'install', package])
+package = 'tqdm'
+subprocess.check_call([sys.executable, '-m', 'pip', 'install', package])
 from coder import coder, decoder
 
 # Creating a window (name & icon)
@@ -42,12 +44,13 @@ try:
     a = open('key.json')
     a.close()
 except:
+    print('Start creating key')
     key_creator()
 
-
-coder(message='Hello world!')
-res = decoder()
-
+print('Start coding')
+code_path = coder(message='Hello world!')
+print('Start decoding')
+res = decoder(code_path=code_path)
 
 
 
