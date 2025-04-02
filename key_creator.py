@@ -18,7 +18,7 @@ def key_creator(file_name: str = 'key'):
     global alp
     variants = []
     i = 0
-    f = randint(10, 20)
+    f = randint(10, 25)
     while i != ((len(alp) * f) + 9):
         n = randint(0, 255), randint(0, 255), randint(0, 255)
         if n not in variants and n != (0,0,0):
@@ -27,7 +27,7 @@ def key_creator(file_name: str = 'key'):
     dict = {space:variants[:5]}
     variants = variants[5:]
     for item in alp:
-        z = randint(3, f)
+        z = randint(5, f)
         dict[item] = variants[:z]
         variants = variants[z:]
     dict['unknown'] = variants[:2]
