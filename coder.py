@@ -16,7 +16,7 @@ def coder(key_file: str = 'key.json', message: str = "Hello World!", code_path: 
     with open(f'{key_file}', 'r+') as file:
         key = json.load(file)
     codes = []
-    for letter in tqdm(message, desc='Coding', colour='#00f058', ncols=70):
+    for letter in tqdm(message, desc='Coding', colour='#00f058'):
         if letter == ' ':
             codes.append(key[letter][randint(0, len(key[letter])-1)])
         elif letter not in key.keys():
@@ -30,7 +30,7 @@ def coder(key_file: str = 'key.json', message: str = "Hello World!", code_path: 
     img = Image.new('RGB', ((len(message)//n)+1, n), 'black')
     idraw = ImageDraw.Draw(img)
     i = 0
-    for y in tqdm(range(n), desc='Writing in picture', colour='#00f058', ncols=70):
+    for y in tqdm(range(n), desc='Writing in picture', colour='#00f058'):
         for x in range((len(message)//n)+1):
             try:
                 idraw.rectangle((x, y, x, y), fill=tuple(codes[i]))
@@ -57,7 +57,7 @@ def decoder(key_file: str = 'key.json', code_path: str = f'Codes/code.png'):
     fl = 0
     file_name = ''
     file_data = ''
-    for y in tqdm(range(picheight), desc='Decoding', colour='#00f058', ncols=70):
+    for y in tqdm(range(picheight), desc='Decoding', colour='#00f058'):
         for x in range(picwidth):
             pix = im[x,y]
             for i in pixs:
