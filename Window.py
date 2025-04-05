@@ -9,6 +9,7 @@ from key_creator import key_creator
 # Checking libraries start --------------------
 import subprocess
 import sys
+
 package = 'pillow'
 subprocess.check_call([sys.executable, '-m', 'pip', 'install', package])
 package = 'tqdm'
@@ -16,23 +17,18 @@ subprocess.check_call([sys.executable, '-m', 'pip', 'install', package])
 # Checking libraries end ---------------
 from coder import coder, decoder
 
-
-
-
-
 # Creating a window (name & icon)
 root = Tk()
 root.title('PNGCoder')
 root.iconbitmap(default='key_icon.ico')
 
-
 # Window size
 user32 = ctypes.windll.user32
 screensize = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
-width = screensize[0]//4
-height = (screensize[1]//3) * 2
+width = screensize[0] // 4
+height = (screensize[1] // 3) * 2
 size = width, height
-root.geometry(f'{width}x{height}+{(screensize[0]-width)//2}+{(screensize[1]-height)//2}')
+root.geometry(f'{width}x{height}+{(screensize[0] - width) // 2}+{(screensize[1] - height) // 2}')
 
 
 # "Do you want to quit?" window
@@ -40,22 +36,21 @@ def close_window():
     if messagebox.askokcancel("Quit", "Do you want to quit?"):
         root.destroy()
 
+
 root.protocol('WM_DELETE_WINDOW', close_window)
 
-
 label = Label(text='PNGCoder menu', font='bold')
-label.pack(anchor='n', pady=int(0.02*height))
+label.pack(anchor='n', pady=int(0.02 * height))
 
 notebook = ttk.Notebook()
 notebook.pack()
-
-
-
 
 # Coding functions
 
 # Need to create new key for coding
 is_gen_key_pressed = False
+
+
 def generate_key_true():
     global is_gen_key_pressed
     global button_select_key_file
@@ -66,6 +61,7 @@ def generate_key_true():
         is_gen_key_pressed = True
         button_select_key_file['state'] = ['disabled']
 
+
 # Need to select file to code
 def coding_file_selector():
     global coding_file_path
@@ -74,6 +70,7 @@ def coding_file_selector():
         path = 'None'
     coding_file_path.set(value=path)
 
+
 # Need to select key file in coding
 def key_file_selector():
     global key_file_path
@@ -81,6 +78,7 @@ def key_file_selector():
     if path == '':
         path = 'None'
     key_file_path.set(value=path)
+
 
 # Need to start coding process
 def start_coding():
@@ -98,7 +96,7 @@ def start_coding():
         if new_name == '':
             new_name = 'key'
         code_key = key_creator(file_name=new_name)
-    if code_key=='None': # No Key Error
+    if code_key == 'None':  # No Key Error
         showerror(title="Error", message="Select key file or create new one")
         return 0
     if code_name != '':
@@ -106,6 +104,7 @@ def start_coding():
     else:
         coder(key_file=code_key, message=message, file_path=coding_file_path.get())
     showinfo(title='Success', message='Coding completed successfully')
+
 
 # Decoding functions
 
@@ -117,6 +116,7 @@ def decode_key_file_selector():
         path = 'None'
     decode_key_file_path.set(value=path)
 
+
 # Need to select coded file
 def decoding_file_selector():
     global code_file_path
@@ -124,6 +124,7 @@ def decoding_file_selector():
     if path == '':
         path = 'None'
     code_file_path.set(value=path)
+
 
 # Need to start decoding process
 def start_decoding():
@@ -137,10 +138,8 @@ def start_decoding():
     if code_file == 'None':
         showerror(title="Error", message="Select PNGcode")
         return 0
-    decoder(key_file=decode_key,code_path=code_file)
+    decoder(key_file=decode_key, code_path=code_file)
     showinfo(title='Success', message='Decoding completed successfully')
-
-
 
 
 # Buttons and other USEFUL elements
@@ -174,7 +173,7 @@ label_key_file_dynam.pack(anchor='w')
 
 new_key_name = StringVar()
 checkbox_generate_key = ttk.Checkbutton(coding_frame, text='Generate a new key', command=generate_key_true)
-checkbox_generate_key.pack(anchor='w', pady=int(0.02*height))
+checkbox_generate_key.pack(anchor='w', pady=int(0.02 * height))
 label_key_name = Label(coding_frame, text='Enter NEW key name')
 label_key_name.pack(anchor='w')
 key_name_editor = Entry(master=coding_frame, textvariable=new_key_name)
@@ -186,13 +185,10 @@ label_key_name.pack(anchor='w')
 code_name_editor = Entry(master=coding_frame, textvariable=new_code_name)
 code_name_editor.pack(anchor='w')
 
-button_start_coding = ttk.Button(coding_frame,command=start_coding, text='Code')
-button_start_coding.pack(anchor='w', padx=int(0.04*width), pady=int(0.02*height))
+button_start_coding = ttk.Button(coding_frame, command=start_coding, text='Code')
+button_start_coding.pack(anchor='w', padx=int(0.04 * width), pady=int(0.02 * height))
 
-coding_frame.pack(anchor='w', padx=int(0.04*width))
-
-
-
+coding_frame.pack(anchor='w', padx=int(0.04 * width))
 
 # Decoding block
 decoding_frame = ttk.Frame(borderwidth=1, relief=SOLID, padding=[8, 10])
@@ -216,20 +212,18 @@ label_decode_key_file.pack(anchor='w')
 label_decode_key_file_dynam = Label(decoding_frame, textvariable=decode_key_file_path, background='Light grey')
 label_decode_key_file_dynam.pack(anchor='w')
 
-
-decoding_label = ttk.Label(master=decoding_frame, text='File will be decoded in directory of this program', foreground='dark grey')
-decoding_label.pack(anchor='w', pady=int(0.02*height))
+decoding_label = ttk.Label(master=decoding_frame, text='File will be decoded in directory of this program',
+                           foreground='dark grey')
+decoding_label.pack(anchor='w', pady=int(0.02 * height))
 button_start_decoding = ttk.Button(master=decoding_frame, command=start_decoding, text='Decode')
-button_start_decoding.pack(anchor='w', padx=int(0.04*width))
+button_start_decoding.pack(anchor='w', padx=int(0.04 * width))
 
-decoding_frame.pack(anchor='w', padx=int(0.04*width), pady=int(0.03*height))
-
+decoding_frame.pack(anchor='w', padx=int(0.04 * width), pady=int(0.03 * height))
 
 notebook.add(coding_frame, text='Coding')
 notebook.add(decoding_frame, text='Decoding')
 
-
 version_label = ttk.Label(master=root, text='1.0.0', foreground='dark grey')
-version_label.pack(anchor='se', pady=int(0.02*height))
+version_label.pack(anchor='se', pady=int(0.02 * height))
 
 root.mainloop()
