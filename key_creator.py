@@ -35,3 +35,4 @@ def key_creator(file_name: str = 'key'):
     dict['\n'] = variants[:2]
     with open(f'{file_name}.json', 'w+') as file:
         json.dump(dict, file)
+    return f'{file_name}.json'

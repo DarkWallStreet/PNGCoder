@@ -74,7 +74,10 @@ def decoder(key_file: str = 'key.json', code_path: str = f'Codes/code.png'):
                     if fl == 2:
                         file_data += letter
     if file_name != '':
-        with open(f'{file_name[1:]}', 'wb+') as file:
+        try:
+            os.mkdir('Decoded files/')
+        except: pass
+        with open(f'Decoded files/{file_name[1:]}', 'wb+') as file:
             file_data = file_data[1:]
             file_data = bytes.fromhex(file_data)
             file.write(file_data)
