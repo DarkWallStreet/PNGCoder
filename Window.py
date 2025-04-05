@@ -9,10 +9,10 @@ from key_creator import key_creator
 # Checking libraries start --------------------
 import subprocess
 import sys
-# package = 'pillow'
-# subprocess.check_call([sys.executable, '-m', 'pip', 'install', package])
-# package = 'tqdm'
-# subprocess.check_call([sys.executable, '-m', 'pip', 'install', package])
+package = 'pillow'
+subprocess.check_call([sys.executable, '-m', 'pip', 'install', package])
+package = 'tqdm'
+subprocess.check_call([sys.executable, '-m', 'pip', 'install', package])
 # Checking libraries end ---------------
 from coder import coder, decoder
 
