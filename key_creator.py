@@ -20,8 +20,8 @@ def key_creator(file_name: str = 'key'):
     i = 0
     f = randint(10, 25)
     while i != ((len(alp) * f) + 9):
-        n = randint(0, 255), randint(0, 255), randint(0, 255)
-        if n not in variants and n != (0,0,0):
+        n = "#{:02x}{:02x}{:02x}".format(randint(0, 255), randint(0, 255), randint(0, 255)).upper()
+        if n not in variants and n != '#000000':
             variants.append(n)
             i += 1
     dict = {space:variants[:5]}

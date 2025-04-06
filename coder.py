@@ -33,7 +33,7 @@ def coder(key_file: str = 'key.json', message: str = "Hello World!", code_path: 
     for y in tqdm(range(n), desc='Writing in picture', colour='#00f058'):
         for x in range((len(message)//n)+1):
             try:
-                idraw.rectangle((x, y, x, y), fill=tuple(codes[i]))
+                idraw.rectangle((x, y, x, y), fill=codes[i])
                 i+=1
             except: pass
     try:
@@ -60,8 +60,9 @@ def decoder(key_file: str = 'key.json', code_path: str = f'Codes/code.png'):
     for y in tqdm(range(picheight), desc='Decoding', colour='#00f058'):
         for x in range(picwidth):
             pix = im[x,y]
+            pix = "#{:02x}{:02x}{:02x}".format(pix[0], pix[1],pix[2]).upper()
             for i in pixs:
-                if list(pix) in i:
+                if pix in i:
                     letter = list(key.keys())[pixs.index(i)]
                     if letter == '|':
                         fl += 1
@@ -75,9 +76,9 @@ def decoder(key_file: str = 'key.json', code_path: str = f'Codes/code.png'):
                         file_data += letter
     if file_name != '':
         try:
-            os.mkdir('Decoded files/')
+            os.mkdir('Decoded_files')
         except: pass
-        with open(f'Decoded files/{file_name[1:]}', 'wb+') as file:
+        with open(f'Decoded_files/{file_name[1:]}', 'wb+') as file:
             file_data = file_data[1:]
             file_data = bytes.fromhex(file_data)
             file.write(file_data)

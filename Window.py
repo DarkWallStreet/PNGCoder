@@ -10,10 +10,10 @@ from key_creator import key_creator
 import subprocess
 import sys
 
-package = 'pillow'
-subprocess.check_call([sys.executable, '-m', 'pip', 'install', package])
-package = 'tqdm'
-subprocess.check_call([sys.executable, '-m', 'pip', 'install', package])
+# package = 'pillow'
+# subprocess.check_call([sys.executable, '-m', 'pip', 'install', package])
+# package = 'tqdm'
+# subprocess.check_call([sys.executable, '-m', 'pip', 'install', package])
 # Checking libraries end ---------------
 from coder import coder, decoder
 
@@ -91,18 +91,21 @@ def start_coding():
     code_name = new_code_name.get()
     code_key = key_file_path.get()
     new_name = new_key_name.get()
+    file = coding_file_path.get()
     message = message_editor.get("1.0", "end")
     if is_gen_key_pressed:
         if new_name == '':
             new_name = 'key'
         code_key = key_creator(file_name=new_name)
+    if file == 'None':
+        file = None
     if code_key == 'None':  # No Key Error
         showerror(title="Error", message="Select key file or create new one")
         return 0
     if code_name != '':
-        coder(key_file=code_key, message=message, file_path=coding_file_path.get(), code_name=code_name)
+        coder(key_file=code_key, message=message, file_path=file, code_name=code_name)
     else:
-        coder(key_file=code_key, message=message, file_path=coding_file_path.get())
+        coder(key_file=code_key, message=message, file_path=file)
     showinfo(title='Success', message='Coding completed successfully')
 
 
@@ -138,8 +141,11 @@ def start_decoding():
     if code_file == 'None':
         showerror(title="Error", message="Select PNGcode")
         return 0
-    decoder(key_file=decode_key, code_path=code_file)
-    showinfo(title='Success', message='Decoding completed successfully')
+    decoded_message = decoder(key_file=decode_key, code_path=code_file)
+    if decoded_message != '':
+        showinfo(title='Success', message=f'Decoding completed successfully\n\nMessage: {decoded_message}')
+    else:
+        showinfo(title='Success', message='Decoding completed successfully')
 
 
 # Buttons and other USEFUL elements
@@ -212,9 +218,10 @@ label_decode_key_file.pack(anchor='w')
 label_decode_key_file_dynam = Label(decoding_frame, textvariable=decode_key_file_path, background='Light grey')
 label_decode_key_file_dynam.pack(anchor='w')
 
-decoding_label = ttk.Label(master=decoding_frame, text='File will be decoded in directory of this program',
-                           foreground='dark grey')
-decoding_label.pack(anchor='w', pady=int(0.02 * height))
+decoding_label0 = ttk.Label(master=decoding_frame, text='File will be decoded in directory of this program',foreground='dark grey')
+decoding_label0.pack(anchor='w', pady=int(0.02 * height))
+decoding_label1 = ttk.Label(master=decoding_frame, text='Decoding can take a lot of time', foreground='dark grey')
+decoding_label1.pack(anchor='w')
 button_start_decoding = ttk.Button(master=decoding_frame, command=start_decoding, text='Decode')
 button_start_decoding.pack(anchor='w', padx=int(0.04 * width))
 
