@@ -1,4 +1,4 @@
-**WARNING:** You need to have Python installes
+**WARNING:** You need to have Python installed
 This progect created with Python 3.12
 
 
