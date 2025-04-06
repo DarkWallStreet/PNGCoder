@@ -16,6 +16,12 @@ subprocess.check_call([sys.executable, '-m', 'pip', 'install', package])
 # Checking libraries end ---------------
 from coder import coder, decoder
 
+
+version = '1.1.0'
+
+
+
+
 # Creating a window (name & icon)
 root = Tk()
 root.title('PNGCoder')
@@ -229,7 +235,7 @@ decoding_frame.pack(anchor='w', padx=int(0.04 * width), pady=int(0.03 * height))
 notebook.add(coding_frame, text='Coding')
 notebook.add(decoding_frame, text='Decoding')
 
-version_label = ttk.Label(master=root, text='1.0.0', foreground='dark grey')
+version_label = ttk.Label(master=root, text=version, foreground='dark grey')
 version_label.pack(anchor='se', pady=int(0.02 * height))
 
 root.mainloop()
