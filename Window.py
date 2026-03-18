@@ -1,23 +1,33 @@
-from tkinter import *
-from tkinter import messagebox
-from tkinter import ttk
-from tkinter import filedialog
-from tkinter.scrolledtext import ScrolledText
-from tkinter.messagebox import showerror, showinfo
-import ctypes
-from key_creator import key_creator
+try:
+    from tkinter import *
+    from tkinter import messagebox
+    from tkinter import ttk
+    from tkinter import filedialog
+    from tkinter.scrolledtext import ScrolledText
+    from tkinter.messagebox import showerror, showinfo
+    import ctypes
+    from key_creator import key_creator
+except:
+    print("Critical built-in python libraries can't be installed. Please reinstall your python 3.14 interpreter\nLink: https://www.python.org/downloads/release/python-3140/")
 # Checking libraries start --------------------
-import subprocess
-import sys
-package = 'pillow'
-subprocess.check_call([sys.executable, '-m', 'pip', 'install', package])
-package = 'tqdm'
-subprocess.check_call([sys.executable, '-m', 'pip', 'install', package])
+try:
+    import subprocess
+    import sys
+    package = 'pillow'
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', package])
+    package = 'tqdm'
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', package])
+except ImportError:
+    print("Critical external python libraries can't be installed")
+except Exception as e:
+    print(f"External python libraries can't be installed with unexpected error. Please try later\nError: {e}")
 # Checking libraries end ---------------
-from coder import coder, decoder
+try:
+    from coder import coder, decoder
+except:
+    print("coder.py and decoder.py can't be installed. Please reinstall PNGCoder project from GitHub\nLink: https://github.com/DarkWallStreet/PNGCoder")
 
-
-version = '1.1.0'
+version = '1.1.1'
 
 
 
